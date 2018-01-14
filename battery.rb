@@ -24,3 +24,7 @@ def window
   end
 end
 
+time = SAVE_INITIAL_TIME
+time = time.split(' ').last
+window
+`gsettings set org.gnome.desktop.session idle-delay #{time}`
