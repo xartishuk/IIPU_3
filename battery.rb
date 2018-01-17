@@ -7,7 +7,7 @@ def window
     para 'Battery Information:', margin: 10
     @info = para width: 400, margin: 10
     para
-    para 'Set display offset (s):', margin: 10
+    para 'Set display idle time (s):', margin: 10
     @input = edit_line width: 400, margin: 10
     @button = button ' Accept ', margin: 10
     Thread.new do
@@ -18,8 +18,13 @@ def window
       end
     end
     @button.click do
-      i = @input.text
-      `gsettings set org.gnome.desktop.session idle-delay #{i}`
+      i = @input.text.to_i
+      puts i
+      if i <= 0 then
+        alert 'Enter positive number'
+      else
+        `gsettings set org.gnome.desktop.session idle-delay #{i}`
+      end
     end
   end
 end
